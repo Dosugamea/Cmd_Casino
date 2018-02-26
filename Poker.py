@@ -124,42 +124,6 @@ def draw(cnt):
     p_cards.sort(reverse=True)
     return p_cards
 
-#カウントしてみるならこれを使う
-'''
-sdict = OrderedDict()
-sdict["NoPair"] = 0
-sdict["OnePair"] = 0
-sdict["TwoPair"] = 0
-sdict["ThreeCard"] = 0
-sdict["FourCard"] = 0
-sdict["FullHouse"] = 0
-sdict["Straight"] = 0
-sdict["Flash"] = 0
-sdict["StraightFlash"] = 0
-sdict["RoyalStraightFlash"] = 0  
-def adict(key):
-    sdict[key] += 1
-
-i = 0
-while True:
-    i+= 1
-    data = check_cards(draw())
-    if "NoPair" in data: adict("NoPair")
-    elif "OnePair" in data: adict("OnePair")
-    elif "TwoPair" in data: adict("TwoPair")
-    elif "ThreeCard" in data: adict("ThreeCard")
-    elif "FourCard" in data: adict("FourCard")
-    elif "FullHouse" in data: adict("FullHouse")
-    elif "Flash" in data: adict("Flash")
-    elif "Straight" in data: adict("Straight")
-    elif "StraightFlash" in data: adict("StraightFlash")
-    else:
-        adict("RoyalStraightFlash")
-        break
-print("TOTAL: %s"%(i))
-print(sdict)
-'''
-
 print("私の手札を引きます...")
 d_cards = draw(5)
 print("プレイヤーの手札を引きます...")
