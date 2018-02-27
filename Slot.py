@@ -10,11 +10,12 @@ pattern = ["1","2","3","4","5","6","7","8","9","R","G","B","JP"]
 def make_slot():
     slot = ["","",""]
     if out/pay > 2: r = random.randint(1,10)
-    elif out/pay >1: r = random.randint(1,5)
-    elif out/pay > 0.5: r = random.randint(1,3)
-    else: r = random.randint(1,2)
+    elif out/pay > 1 : r = random.randint(1,7)
+    else: r = random.randint(1,5)
     #3-10回に1回あたる
     if r == 1:
+        if jackpot > 3000: r = random.randint(1,25)
+        elif jackpot > 2000: r = random.randint(1,50)
         r = random.randint(1,100)
         if r < 2: slot[0] = "JP"
         elif r < 7: slot[0] = random.choice(["R","G","B"])
@@ -29,7 +30,8 @@ def make_slot():
     return slot
 
 while True:
-    print("P/O : %s"%(out/pay))
+    #print("P/O : %s"%(out/pay))
+    print("")
     print("JACKPOT: %s"%(jackpot))
     print("所持金: %sクレジット"%(money))
     if money <= 0:
@@ -52,7 +54,9 @@ while True:
     print(str(inp)+"クレジット かけます")
     money -= inp
     slot = make_slot()
+    print("")
     print(slot)
+    print("")
     if slot[0] == slot[1] == slot[2]:
         print("当たり")
         if slot[0] in ["1","2","3","4","5","6","7","8","9"]:
