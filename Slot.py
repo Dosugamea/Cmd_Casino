@@ -2,16 +2,34 @@
 
 money = 100
 jackpot = 1000
+pay = 1
+out = 1
 
 pattern = ["1","2","3","4","5","6","7","8","9","R","G","B","JP"]
 
-#13 * 13 * 13 = 2197
-#2197 / 5:
-
 def make_slot():
-    return random.sample(pattern, 3)
+    slot = ["","",""]
+    if out/pay > 2: r = random.randint(1,10)
+    elif out/pay >1: r = random.randint(1,5)
+    elif out/pay > 0.5: r = random.randint(1,3)
+    else: r = random.randint(1,2)
+    #3-10回に1回あたる
+    if r == 1:
+        r = random.randint(1,100)
+        if r < 2: slot[0] = "JP"
+        elif r < 7: slot[0] = random.choice(["R","G","B"])
+        else: slot[0] = random.choice(["1","2","3","4","5","6","7","8","9"])
+        slot[1] = slot[0]
+        slot[2] = slot[0]
+    else:
+        slot[0] = random.choice(pattern)
+        slot[1] = random.choice(pattern)
+        slot[2] = random.choice(pattern)
+        if slot[0] == slot[1] == slot[2]: slot[1] = "JP"
+    return slot
 
 while True:
+    print("P/O : %s"%(out/pay))
     print("JACKPOT: %s"%(jackpot))
     print("所持金: %sクレジット"%(money))
     if money <= 0:
@@ -34,23 +52,17 @@ while True:
     print(str(inp)+"クレジット かけます")
     money -= inp
     slot = make_slot()
-    atari = False
-    if slot[0] != slot[1] and slot[1] != slot[2]:
-        r = random.randint(1,20)
-        if r == 1:
-            atari = True
-            slot[0] = slot[1] = slot[2] = random.choice(pattern)
-    else:
-        atari = True
     print(slot)
-    if atari:
+    if slot[0] == slot[1] == slot[2]:
         print("当たり")
         if slot[0] in ["1","2","3","4","5","6","7","8","9"]:
             print("%s x %s = %s獲得!"%(inp,slot[0],inp*int(slot[0])))
             money += inp * int(slot[0])
+            out = inp * int(slot[0])
         elif slot[0] in ["R","G","B"]:
             print("%s x %s = %s獲得!"%(inp,15,inp*15))
             money += inp * 15
+            out = inp * int(3)
         else:
             print("ジャックポット!!")
             print("%s 獲得!!"%(jackpot))
@@ -59,3 +71,4 @@ while True:
     else:
         print("はずれ")
         jackpot += inp
+    pay += inp
