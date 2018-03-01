@@ -41,7 +41,7 @@ class BingoGame():
         for x in range(len(card)):
             for y in range(len(card[x])):
                 if card[x][y] == num:
-                    card[x][y] == "OPEN"
+                    card[x][y] = "OPEN"
         return card
 
 bingo = BingoGame(75)
