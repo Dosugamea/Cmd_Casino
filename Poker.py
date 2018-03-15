@@ -100,7 +100,6 @@ class Poker():
 
     #カードを引く
     def draw(self,cnt):
-        print(len(self.cards))
         cards = []
         if len(self.cards) != 0:
             for i in range(cnt):
@@ -117,6 +116,7 @@ class Poker():
         self.cards = [[n, m] for m in ['♣', '♦', '♥', '♠'] for n in range(1, 14)]
         self.d_cards = self.draw(5)
         self.p_cards = self.draw(5)
+        print(self.p_cards)
     
     #カードを入れ替える
     def change(self,id_text):
@@ -125,7 +125,7 @@ class Poker():
                 dr = self.draw(1)
                 if dr != False:
                     self.p_cards.pop(int(i)-1)
-                    self.p_cards.insert(int(i),dr[0])
+                    self.p_cards.insert(int(i)-1,dr[0])
         
     #カードセットは インスタンスを作った時点で決めとく()
     def __init__(self):
